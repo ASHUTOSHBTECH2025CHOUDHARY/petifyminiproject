@@ -46,9 +46,16 @@ const Myposts = () => {
     console.log("mypost chla")
     navigation(`/mysinglepost/${id}`)
   }
-  useEffect(() => {
+  const handledelete=async(id)=>{
+    console.log(_id)
+    console.log(id)
+    await axios.delete(`http://localhost:8080/api/v2/deletemypost/${_id}/${id}`).catch((err)=>console.log(err))
     findPosts().then((data) => setPost(data));
-  }, []);
+  }
+  useEffect(() => {
+    console.log("lag gaye")
+    findPosts().then((data) => setPost(data));
+  },[]);
   return (
     <HStack width="100%" height="100vh" marginTop={5}>
       <VStack width="20%" height="100%">
@@ -102,6 +109,9 @@ const Myposts = () => {
 
               <Button variant="solid" colorScheme="blue" onClick={()=>handleclick(posts._id)}>
               asdlkfalkdfj
+            </Button>
+            <Button variant="solid" colorScheme="red" onClick={()=>handledelete(posts._id)}>
+                Delete
             </Button>
             </HStack>
           </Box>

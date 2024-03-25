@@ -11,10 +11,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const item=localStorage.getItem("token")
+  console.log(item)
   const logout = async () => {
     let res = await axios.get("http://localhost:8080/api/v1/logout", {
       withCredentials: true,
     });
+    localStorage.clear()
     navigate("/login");
     console.log(res);
   };
@@ -37,14 +40,16 @@ const Navbar = () => {
           </Text>
         </Flex>
       </Link>
-      <Flex >
-        <Link to="/mypost" ><Button>
-          Myposts
-        </Button></Link>
-        <Button mx={"4px"} onClick={logout}>
-          <Text>logout</Text>
-        </Button>
-      </Flex>
+        {
+      
+          item===null?'':<Flex ><Link to="/mypost" ><Button>
+            Myposts
+              </Button></Link>
+            <Button mx={"4px"} onClick={logout}>
+            <Text>logout</Text>
+          </Button>
+        </Flex>
+        }
     </Flex>
   );
 };

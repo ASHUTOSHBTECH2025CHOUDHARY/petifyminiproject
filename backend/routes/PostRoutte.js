@@ -44,6 +44,27 @@ router.get('/getthispost/:id',async(req,res)=>{
   res.status(200).json({post})
 })
 
+router.delete('/deletemypost/:_id/:id',async(req,res)=>{
+  console.log("system")
+  let postid=req.params.id
+  let userid=req.params._id
+  let user=await UserModel.findById(userid)
+  let userpost=user.Post
+  let posting=userpost.filter((post)=>post._id!=postid)
+  await PostModel.findByIdAndDelete(postid)
+  console.log(posting)
+  let length=user.Post.length
+  for(let i=0;i<length;i++){
+    user.Post.pop()
+  }
+  for(let i of posting){
+    user.Post.push(i)
+  }
+  user.save()
+  console.log(user.Post)
+  res.status(200).json({posting})
+})
+
 router.get('/getMyPosts/:_id',async(req,res)=>{
     let _id=req.params._id
     // console.log(req.params)
