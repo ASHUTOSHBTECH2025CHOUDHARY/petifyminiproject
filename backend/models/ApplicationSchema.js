@@ -13,6 +13,9 @@ const Applicationschema= new mongoose.Schema({
         type:String,
         required:true
     },
+    userid:{
+        type:String
+    },
     email:{
         type:String,
         required :true

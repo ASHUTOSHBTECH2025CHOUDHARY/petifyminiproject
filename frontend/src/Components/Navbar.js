@@ -34,10 +34,12 @@ const Navbar = () => {
     >
       <Link to="/">
         <Flex align="center" mx={10}>
-          <Box as={GiSittingDog} />
-          <Text fontSize="xl" ml={2} fontWeight="bold">
+         <Link to='/dashboard'>
+         <Box as={GiSittingDog} /></Link> 
+         <Link to='/dashboard'> <Text fontSize="xl" ml={2} fontWeight="bold">
             PETIFY
           </Text>
+          </Link>
         </Flex>
       </Link>
         {

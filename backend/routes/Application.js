@@ -5,10 +5,10 @@ const router=express.Router()
 
 router.post('/createapplication',async(req,res)=>{
     try {
-    const {firstname,lastname,content,email,postid}=req.body;
+    const {firstname,lastname,userid,content,email,postid}=req.body;
     console.log(firstname)
     const appliction=await ApplicationModel.create({
-        firstname,lastname,content,postid,email
+        firstname,lastname,content,postid,email,userid
     })
     const post=await PostModel.findById(postid)
     if(!post)

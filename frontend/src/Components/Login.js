@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiSittingDog } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ import { addtoken } from "../Store/Slice/Userslice";
 const Login = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  
   const dipatch = useDispatch();
   const navigation = useNavigate();
   const submithandler = async () => {
@@ -54,6 +55,9 @@ const Login = () => {
     setusername(e.target.value);
   };
   console.log(password + " " + username);
+  useEffect(()=>{
+    localStorage.clear()
+  },[])
   return (
     <div
       style={{

@@ -2,14 +2,14 @@ import express from "express";
 import PostModel from "../models/PostSchema.js";
 import UserModel from "../models/UserAuth.js";
 import verifytoken from "../middleware/verifytoken.js";
+import Applicationmodel from "../models/ApplicationSchema.js";
 
 const router = express.Router();
 
 router.post("/createpost/:userid", async (req, res) => {
   const { userid } = req.params;
+  console.log(userid)
   const { name, categories, content } = req.body;
-  console.log(req.body);
-  console.log(req.params);
   try {
     const newPost = await PostModel.create({
       name,
@@ -51,6 +51,17 @@ router.delete('/deletemypost/:_id/:id',async(req,res)=>{
   let user=await UserModel.findById(userid)
   let userpost=user.Post
   let posting=userpost.filter((post)=>post._id!=postid)
+  let deletepost=userpost.filter((post)=>post._id==postid)
+  let findpost=await PostModel.findById(deletepost)
+  findpost=findpost.applications
+  const deleteapplication=async(id)=>{
+    await Applicationmodel.findByIdAndDelete(id)
+  }
+  console.log("asdkfalsdjflksdjflasdjkfladskjflkfj")
+  console.log(findpost)
+  for(let i of findpost){
+    deleteapplication(i)
+  }
   await PostModel.findByIdAndDelete(postid)
   console.log(posting)
   let length=user.Post.length
@@ -68,7 +79,7 @@ router.delete('/deletemypost/:_id/:id',async(req,res)=>{
 router.get('/getMyPosts/:_id',async(req,res)=>{
     let _id=req.params._id
     // console.log(req.params)
-    console.log(_id)
+    // console.log(_id)
     let user=await UserModel.findById(_id)
     let Post=user.Post
     // console.log(Post)
@@ -77,7 +88,7 @@ router.get('/getMyPosts/:_id',async(req,res)=>{
       let post=await PostModel.findById(i);
       posts.push(post)
     }
-    console.log(posts)
+    // console.log(posts)
     res.status(200).json({success:true,posts})
 })
 

@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
   const dispatch=useDispatch()
-  //  
+  let string="aldksjfjlka alsdkfjaslkdjf aldsfkjalsdjf alsdfjkalskdjf asldjfasdlfj alsdfjsdlajf aslkfjlasdkjf alksdjflksjdaf alsdfjalskdjf asdlkfjladskjf asldfjlaskjdf asldfjkslakdjf asldfjsldakfj asldfjkdslkjf asldfjsldkjf asldjflskdfj asdkfjlkjasdf asdlfkjaslkdjf alskdjfalksjdf asldkfjaldskfj"
   async function findPosts() {
     try {
       const res = await axios
@@ -87,25 +87,48 @@ const Dashboard = () => {
           overflow="visible"
           variant="outline"
           width="100%"
+          position="relative"
+          minW="400px"
+          maxW="full"
+          maxH="200px"
+          minH="200px" // Set maximum width
+          height="200px" // Set fixed height
         >
-          <Image
-            objectFit="cover"
-            maxW={{ base: "100%", sm: "200px" }}
-            src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            alt="Caffe Latte"
-          />
-
-          <HStack px={4} py={2} spacing={4} width="100%">
-            <Heading size="md">The perfect latte</Heading>
-            <Text py="2">
-              {posts.content}
-            </Text>
-            
-            <Button variant="solid" colorScheme="blue" onClick={()=>handleclick(posts._id)}>
-              Buy Latte
-            </Button>
+          <HStack px={4} py={2} spacing={4} width="100%" height="100%"> {/* Specify height for HStack */}
+            <Image
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "200px" }}
+              minW={{ base: "100%", sm: "200px" }}
+              maxH="100%" // Set maximum height
+              src="https://t4.ftcdn.net/jpg/02/26/53/33/360_F_226533348_TiIz0m2dU4dBXC6yFJrNOfXfh5YcEecY.jpg"
+              alt="Caffe Latte"
+            />
+            <VStack align="start" spacing={2} flex="1" maxW="calc(100% - 200px)" py={4}> {/* Subtract Image width from max width */}
+              <Heading size="md">{posts.name}</Heading>
+              <Heading size="md">{posts.categories}</Heading>
+              <Text>
+  {posts.content.split(" ").slice(0, 10).join(" ")}
+  {/* text is your input string */}...
+</Text>
+            </VStack>
           </HStack>
+          <Button
+            variant="solid"
+            colorScheme="blue"
+            position="absolute"
+            bottom="4"
+            right="4"
+            fontSize="sm" // Set font size
+            width="100px" // Set fixed width
+            height="40px" // Set fixed height
+            lineHeight="40px" // Center button content vertically
+            borderRadius="md" // Apply border radius
+            onClick={() => handleclick(posts._id)}
+          >
+            Adopt it
+          </Button>
         </Box>
+              
         ))}
       </VStack>
     </HStack>

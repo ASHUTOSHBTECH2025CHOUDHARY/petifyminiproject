@@ -7,6 +7,7 @@ import Dashboard from './Components/Dashboard'
 import Myposts from './Components/Myposts'
 import Singlepost from './Components/Singlepost'
 import { Mysinglepost } from './Components/Mysinglepost'
+import Createpost from './Components/Createpost'
 const App = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path='/login' element={<Login/>}/>
           <Route path='signup'element={<Signup/>}/>
+          <Route path='/createpost/:id' element={<Createpost/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/mypost' element={<Myposts/>}/>
           <Route path='/singlepost/:id' element={<Singlepost/>}/>
