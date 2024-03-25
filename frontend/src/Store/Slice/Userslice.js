@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode'
  
 const initialState ={
     _id:'',
+    postid:'',
     token:''
 }
 const extractuserinfo=(token)=>{
@@ -31,9 +32,13 @@ export const userslice=createSlice({
         //    console.log(_id)
             state._id=_id
         },
+        addpostid:(state,action)=>{
+            state.postid=action.payload
+        }
+        ,
         resetstate:()=>initialState
     }
 })
 
-export const {addtoken}=userslice.actions
+export const {addtoken,addpostid}=userslice.actions
 export default userslice.reducer

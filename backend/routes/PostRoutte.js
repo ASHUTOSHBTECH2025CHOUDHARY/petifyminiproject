@@ -1,7 +1,6 @@
 import express from "express";
 import PostModel from "../models/PostSchema.js";
 import UserModel from "../models/UserAuth.js";
-import Post_Model from "../models/PostSchema.js";
 import verifytoken from "../middleware/verifytoken.js";
 
 const router = express.Router();
@@ -18,8 +17,6 @@ router.post("/createpost/:userid", async (req, res) => {
       userid,
       content,
     });
-    // newPost.userid.push(userId);
-    // await newPost.save()
     const user = await UserModel.findById(userid);
 
     if (!user) {
@@ -41,7 +38,13 @@ router.get('/getAllPosts',async(req,res)=>{
     res.status(200).json({allposts})
 })
 
-router.get('/getMyPosts/:_id',verifytoken,async(req,res)=>{
+router.get('/getthispost/:id',async(req,res)=>{
+  let id=req.params.id
+  let post=await PostModel.findById(id)
+  res.status(200).json({post})
+})
+
+router.get('/getMyPosts/:_id',async(req,res)=>{
     let _id=req.params._id
     // console.log(req.params)
     console.log(_id)

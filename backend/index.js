@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { connectdb } from "./databse.js";
 import userRoutes from "./routes/UserRoute.js";
 import PostRoute from "./routes/PostRoutte.js";
+import applicationRoute from "./routes/Application.js"
 import cookieParser from "cookie-parser";
 const app = express();
 app.use(cors({
@@ -17,6 +18,7 @@ app.use(express.json())
 const PORT = 8080;
 app.use("/api/v1",userRoutes)
 app.use("/api/v2",PostRoute)
+app.use("/api/v3",applicationRoute)
 connectdb();
 
 app.get("/", (req, res) => res.send("Hello World!"));

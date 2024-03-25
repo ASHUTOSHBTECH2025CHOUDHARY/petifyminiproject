@@ -26,27 +26,26 @@ const Myposts = () => {
   const navigation = useNavigate();
   async function findPosts() {
     try {
-      // console.log(localStorage.getItem("token"))
       const res = await axios
         .get(
           ` http://localhost:8080/api/v2/getMyPosts/${_id}`,
           { withCredentials: true }
         )
         .catch((err) => console.log(err));
-      // console.log(res);
       if (!res) {
         navigation("/login");
       }
-      // console.log("aksdjfhaksdjfhakjsdhf");
       const data = res.data.posts;
-      // console.log(data);
       return data;
     } catch (error) {
       console.log(error);
       return [];
     }
   }
-
+  const handleclick=(id)=>{
+    console.log("mypost chla")
+    navigation(`/mysinglepost/${id}`)
+  }
   useEffect(() => {
     findPosts().then((data) => setPost(data));
   }, []);
@@ -101,9 +100,9 @@ const Myposts = () => {
               <Heading size="md">The perfect latte</Heading>
               <Text py="2">{posts.content}</Text>
 
-              <Button variant="solid" colorScheme="blue">
-                Buy Latte
-              </Button>
+              <Button variant="solid" colorScheme="blue" onClick={()=>handleclick(posts._id)}>
+              asdlkfalkdfj
+            </Button>
             </HStack>
           </Box>
         ))}

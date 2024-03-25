@@ -12,11 +12,13 @@ import {
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addpostid } from "../Store/Slice/Userslice";
 
 const Dashboard = () => {
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   //  
   async function findPosts() {
     try {
@@ -35,7 +37,11 @@ const Dashboard = () => {
       return [];
     }
   }
-
+  const handleclick=(id)=>{
+    console.log("chALA")
+    dispatch(addpostid(id))
+    navigate(`/singlepost/${id}`)
+  }
   useEffect(() => {
     findPosts().then((data) => setPost(data));
   }, []);
@@ -74,33 +80,32 @@ const Dashboard = () => {
       >
         {post.map((posts, index) => (
           <Box
-            key={index}
-            direction={{ base: "column", sm: "row" }}
-            boxShadow="md"
-            borderRadius="lg"
-            overflow="visible"
-            variant="outline"
-            width="100%"
-          >
-            <Image
-              objectFit="cover"
-              maxW={{ base: "100%", sm: "200px" }}
-              src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-              alt="Caffe Latte"
-            />
+          key={index}
+          direction={{ base: "column", sm: "row" }}
+          boxShadow="md"
+          borderRadius="lg"
+          overflow="visible"
+          variant="outline"
+          width="100%"
+        >
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%", sm: "200px" }}
+            src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+            alt="Caffe Latte"
+          />
 
-            <HStack px={4} py={2} spacing={4} width="100%">
-              <Heading size="md">The perfect latte</Heading>
-              <Text py="2">
-                Caffè latte is a coffee beverage of Italian origin made with
-                espresso and steamed milk.
-              </Text>
-
-              <Button variant="solid" colorScheme="blue">
-                Buy Latte
-              </Button>
-            </HStack>
-          </Box>
+          <HStack px={4} py={2} spacing={4} width="100%">
+            <Heading size="md">The perfect latte</Heading>
+            <Text py="2">
+              {posts.content}
+            </Text>
+            
+            <Button variant="solid" colorScheme="blue" onClick={()=>handleclick(posts._id)}>
+              Buy Latte
+            </Button>
+          </HStack>
+        </Box>
         ))}
       </VStack>
     </HStack>

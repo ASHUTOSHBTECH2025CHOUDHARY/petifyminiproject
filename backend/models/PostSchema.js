@@ -17,6 +17,10 @@ const Post_Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  applications:[{
+    type:mongoose.Schema.ObjectId,
+    ref:"Application"
+  }]
 });
 
 const Post_Model = mongoose.model("post", Post_Schema);
