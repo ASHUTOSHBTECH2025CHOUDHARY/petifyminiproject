@@ -15,7 +15,7 @@ const verifytoken=async(req,res,next)=>{
     next();
    } catch (error) {
     // res.send(500).json({success:false})
-    console.log((err)=>console.log(err))
+    console.log((err)=>console.log("token ka error"));
    }
 }
 

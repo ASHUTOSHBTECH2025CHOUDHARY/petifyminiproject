@@ -38,9 +38,13 @@ router.get('/getAllPosts',async(req,res)=>{
     res.status(200).json({allposts})
 })
 
-router.get('/getthispost/:id',async(req,res)=>{
+router.get('/getthispost/:id',verifytoken,async(req,res)=>{
   let id=req.params.id
   let post=await PostModel.findById(id)
+  console.log(post)
+  if(!post){
+    res.status(200).json({msg:"nothing found"})  
+  }
   res.status(200).json({post})
 })
 
@@ -76,7 +80,7 @@ router.delete('/deletemypost/:_id/:id',async(req,res)=>{
   res.status(200).json({posting})
 })
 
-router.get('/getMyPosts/:_id',async(req,res)=>{
+router.get('/getMyPosts/:_id',verifytoken,async(req,res)=>{
     let _id=req.params._id
     // console.log(req.params)
     // console.log(_id)
@@ -88,7 +92,7 @@ router.get('/getMyPosts/:_id',async(req,res)=>{
       let post=await PostModel.findById(i);
       posts.push(post)
     }
-    // console.log(posts)
+
     res.status(200).json({success:true,posts})
 })
 

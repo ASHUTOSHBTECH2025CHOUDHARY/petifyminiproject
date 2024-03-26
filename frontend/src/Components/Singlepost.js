@@ -3,7 +3,7 @@ import {
   Box, Button, Heading, Input, HStack, Image, Text, extendTheme, ChakraProvider, FormControl, FormLabel, Spacer, VStack
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addtoken } from '../Store/Slice/Userslice';
 
@@ -11,6 +11,7 @@ const Singlepost = () => {
   const activeLabelStyles = {
     transform: "scale(0.85) translateY(-24px)"
   };
+  const navigate=useNavigate()
   let token =localStorage.getItem("token")
   const dispatch=useDispatch()
   dispatch(addtoken(token))
@@ -76,9 +77,19 @@ const Singlepost = () => {
   const location = useLocation();
   const [post, setpost] = useState([]);
   let _id = '';
-
+  const logout = async () => {
+    let res = await axios.get("http://localhost:8080/api/v1/logout", {
+      withCredentials: true,
+    });
+    localStorage.clear()
+    navigate("/login");
+    console.log(res);
+  };
   const findpost = async () => {
-    let res = await axios.get(`http://localhost:8080/api/v2/getthispost/${_id}`).catch((error) => console.log(error));
+    let res = await axios.get(`http://localhost:8080/api/v2/getthispost/${_id}`,{withCredentials:true}).catch((error) => {
+      logout()
+  console.log(error)
+  });
     let data = res.data.post;
     return data;
   }
@@ -107,7 +118,7 @@ const Singlepost = () => {
     let arr = location.pathname.split('/');
     _id = arr[2];
     console.log(_id);
-    findpost().then((data) => setpost(data));
+    findpost().then((data) => setpost(data)).catch((err)=>console.log(err));
   }, []);
 
   return (

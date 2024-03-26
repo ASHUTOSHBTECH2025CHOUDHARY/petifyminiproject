@@ -10,7 +10,7 @@ export const Mysinglepost = () => {
     let _id='';
     console.log(post)
     const findpost=async()=>{
-      let res=await axios.get( `http://localhost:8080/api/v2/getthispost/${_id}`).catch((error)=>console.log(error))
+      let res=await axios.get( `http://localhost:8080/api/v2/getthispost/${_id}`,{withCredentials:true}).catch((error)=>console.log(error))
       let data=res.data.post
       return data
     }
