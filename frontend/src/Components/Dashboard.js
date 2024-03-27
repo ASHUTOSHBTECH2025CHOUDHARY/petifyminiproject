@@ -11,14 +11,19 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addpostid } from "../Store/Slice/Userslice";
+import { addpostid, addtoken } from "../Store/Slice/Userslice";
 
 const Dashboard = () => {
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
+  const [user,setuser]=useState([])
   const dispatch=useDispatch()
+  let admin=''
+  let token=localStorage.getItem("token")
+  dispatch(addtoken(token))
+  const id=useSelector(state=>state.userdata._id)
   let string="aldksjfjlka alsdkfjaslkdjf aldsfkjalsdjf alsdfjkalskdjf asldjfasdlfj alsdfjsdlajf aslkfjlasdkjf alksdjflksjdaf alsdfjalskdjf asdlkfjladskjf asldfjlaskjdf asldfjkslakdjf asldfjsldakfj asldfjkdslkjf asldfjsldkjf asldjflskdfj asdkfjlkjasdf asdlfkjaslkdjf alskdjfalksjdf asldkfjaldskfj"
   async function findPosts() {
     try {
@@ -29,8 +34,6 @@ const Dashboard = () => {
         navigate("/login");
       }
       const data = res.data.allposts;
-      console.log(data)
-      // localStorage.setItem("token",data);
       return data;
     } catch (error) {
       console.log(error);
@@ -38,17 +41,27 @@ const Dashboard = () => {
     }
   }
   const handleclick=(id)=>{
-    console.log("chALA")
     dispatch(addpostid(id))
     navigate(`/singlepost/${id}`)
   }
+  
+  const findadmin=async()=>{
+      let res=await axios.get(` http://localhost:8080/api/v1/getuser/${id}`).catch((error)=>console.log(error))
+      let {role}=res.data.user
+        return res.data.user
+  }
+  console.log(user)
   useEffect(() => {
-    findPosts().then((data) => setPost(data));
+    findadmin().then((data)=>setuser(data)).catch((error)=>console.log("Findamin nhi chala"))
+    findPosts().then((data) => setPost(data)).catch((err)=>console.log("findposts nhi chala"));
+    if(user.role=="admin"){
+      admin="admin"
+    }
   }, []);
 
   return (
-    <HStack width="100%" height="100vh" marginTop={5}>
-      <VStack width="20%" height="100%">
+    <HStack width="100%" height="100vh" marginTop={5} padding={3}>
+      <VStack  height="100%" m={10}>
         <Flex
           align="center"
           justify="space-between"
@@ -59,15 +72,16 @@ const Dashboard = () => {
           <Avatar name="John Doe" src="https://via.placeholder.com/150" />
 
           <Box ml={4}>
-            <Text fontSize="xl">John Doe</Text>
+            <Text fontSize="xl">{user.username}</Text>
             <Text fontSize="sm" color="gray.600">
-              Frontend Developer
+             {user.email}
             </Text>
           </Box>
-
-          <Button colorScheme="teal" variant="outline" size="sm">
-            Edit Profile
-          </Button>
+        {
+          user.role==="admin"?<Link to='/adminpanel'><Button colorScheme="teal" variant="outline" size="sm">
+          See all useres
+        </Button></Link>:""
+        }
         </Flex>
       </VStack>
 

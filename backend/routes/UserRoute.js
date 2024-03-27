@@ -1,14 +1,52 @@
-import express from "express";
+import express, { application } from "express";
 import User_model from "../models/UserAuth.js";
+import Postmodel from "../models/PostSchema.js"
+import Applicationmodel from "../models/ApplicationSchema.js"
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
 const secret_key = "adhewegfrithregrigheofeiofneojeokgroegh";
 
+router.get('/getuser/:id',async(req,res)=>{
+  let {id}=req.params
+  let user=await User_model.findById(id)
+  console.log(user)
+  res.status(200).json({user})
+
+})
+router.delete('/deleteuser/:id',async(req,res)=>{
+  let {id}=req.params
+  let user=await User_model.findById(id)
+  let post=user.Post
+  console.log(post)
+  const handleapplications=async(id)=>{
+    console.log("appliation id")
+    await Applicationmodel.findByIdAndDelete(id)
+  }
+  const handlepost=async(id)=>{
+    let idpost=await Postmodel.findById(id)
+    let appliation=idpost.applications
+    for(let i of appliation){
+      handleapplications(i)
+    }
+    console.log("post id")
+    await Postmodel.findByIdAndDelete(id)
+  }
+  for(let i of post){
+    handlepost(i)
+  }
+  await User_model.findByIdAndDelete(id)
+  user=await User_model.find()
+  res.status(200).json({user})
+})
+router.get('/getallusers',async(req,res)=>{
+  let users=await User_model.find()
+  res.status(200).json({users})
+})
 router.post("/signup", async (req, res) => {
   try {
-    const { username, password, email, Address } = req.body;
+    const { username, password, role,email, Address } = req.body;
     console.log(req.body);
     const existing_User = await User_model.findOne({ email });
 
@@ -22,6 +60,7 @@ router.post("/signup", async (req, res) => {
       username,
       email,
       Address,
+      role,
       password: hashed_password,
     });
 
@@ -60,7 +99,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.get('/logout',async(req,res)=>{
-  // console.log("asdlkfj")
    res.clearCookie("token").json({msg:"hogayakam"})
 })
 

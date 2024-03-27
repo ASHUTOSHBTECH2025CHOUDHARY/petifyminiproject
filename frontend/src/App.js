@@ -8,11 +8,14 @@ import Myposts from './Components/Myposts'
 import Singlepost from './Components/Singlepost'
 import { Mysinglepost } from './Components/Mysinglepost'
 import Createpost from './Components/Createpost'
+import Adminpage from './Components/Adminpage'
 const App = () => {
   return (
     <div>
         <Navbar/>
         <Routes>
+          <Route path='/' element={<Login/>}/>
+          <Route path='/adminpanel' element={<Adminpage/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='signup'element={<Signup/>}/>
           <Route path='/createpost/:id' element={<Createpost/>}/>

@@ -9,8 +9,6 @@ const initialState ={
 const extractuserinfo=(token)=>{
     try {
         const decodetoken=jwtDecode(token);
-
-        console.log(decodetoken)
         return{
             _id:decodetoken.id
         }
@@ -26,7 +24,6 @@ export const userslice=createSlice({
     initialState,
     reducers:{
         addtoken:(state,action)=>{
-            console.log("slice ahcla")
            state.token=action.payload
            const {_id}=extractuserinfo(action.payload)
         //    console.log(_id)

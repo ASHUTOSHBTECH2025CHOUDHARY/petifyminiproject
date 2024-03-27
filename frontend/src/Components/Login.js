@@ -34,7 +34,6 @@ const Login = () => {
         { withCredentials: true }
       );
       let data = res.data;
-      console.log(data);
       
       dipatch(addtoken(data));
 
@@ -54,7 +53,6 @@ const Login = () => {
   const handleusername = (e) => {
     setusername(e.target.value);
   };
-  console.log(password + " " + username);
   useEffect(()=>{
     localStorage.clear()
   },[])
