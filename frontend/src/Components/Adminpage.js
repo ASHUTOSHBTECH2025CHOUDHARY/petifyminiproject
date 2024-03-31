@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {Container,Heading,Text,CardBody,CardFooter,Image,Stack,Button,Card,} from '@chakra-ui/react'
 import axios from 'axios'
+import { useNavigate, useNavigation } from 'react-router-dom'
 const Adminpage = () => {
   const [users,setusers]=useState([])
+  const navigate=useNavigate()
   const findusers=async()=>{
     let res=await axios.get(` http://localhost:8080/api/v1/getallusers`).catch((err)=>{
       console.log(err)
@@ -17,7 +19,10 @@ const Adminpage = () => {
     let res=await axios.delete(`http://localhost:8080/api/v1/deleteuser/${id}`).catch((err)=>console.log(err))
     setusers(res.data.user)
   }
-  useEffect(()=>{
+  const handleuser=(id)=>{
+    navigate(`/seeuser/${id}`)
+  }
+  useEffect(()=>{ 
     findusers().then((data)=>setusers(data)).catch((err)=>console.log("users set nhi hua"))
   },[])
   console.log(users)
@@ -51,8 +56,11 @@ const Adminpage = () => {
                 {/* <Button variant='solid' colorScheme='red' onClick={handledelete}>
                   Delete User
                 </Button> */}
-                <Button onClick={()=>handlehllo(user._id)}>
-                  hllo
+                <Button colorScheme='blue' m={2} onClick={()=>handleuser(user._id)}>
+                  View
+                </Button>
+                <Button  colorScheme='red' m={2} onClick={()=>handlehllo(user._id)}>
+                  Delete
                 </Button>
               </CardFooter>
             </Stack>

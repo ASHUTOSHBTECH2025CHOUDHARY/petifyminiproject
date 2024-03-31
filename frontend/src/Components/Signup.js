@@ -9,11 +9,27 @@ import {
   VStack,
   Button,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { GiSittingDog } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const Signup = () => {
+  const [username,setusername]=useState()
+  const [email,setemail]=useState()
+  const [password,setpassword]=useState()
+  const [Address,setAddress]=useState()
+  const navigate=useNavigate()
+  const handlesubmit=async()=>{
+    const res=await axios.post(` http://localhost:8080/api/v1/signup`,{
+      username,
+      Address,
+      email,
+      password
+    })
+    navigate('/login')
+  }
+  console.log(username)
   return (
     <div
       style={{
@@ -45,22 +61,22 @@ const Signup = () => {
             </VStack>
             <FormControl>
               <FormLabel>UserName</FormLabel>
-              <Input rounded="none" variant={"outline"} />
+              <Input rounded="none" value={username} onChange={(e)=>setusername(e.target.value)} variant={"outline"} />
             </FormControl>
             <FormControl>
               <FormLabel>Email Address</FormLabel>
-              <Input rounded="none" variant={"outline"} />
+              <Input rounded="none" value={email}  variant={"outline"} onChange={(e)=>setemail(e.target.value)} />
             </FormControl>
             <FormControl>
               <FormLabel>Password</FormLabel>
-              <Input rounded={"none"} variant={"outline"} type="password" />
+              <Input rounded={"none"} value={password} onChange={(e)=>setpassword(e.target.value)} variant={"outline"} type="password" />
             </FormControl>
             <FormControl>
               <FormLabel>Address</FormLabel>
-              <Input rounded="none" variant={"outline"} />
+              <Input rounded="none" value={Address} onChange={(e)=>setAddress(e.target.value)}  variant={"outline"} />
             </FormControl>
             <HStack w={"full"} justify={"space-between"}>
-              <Button rounded={"none"}>Signup</Button>
+              <Button onClick={handlesubmit} rounded={"none"}>Signup</Button>
               <Link to="/login">
                 <Button variant={"Link"} colorScheme="blue">
                   Already have an account.

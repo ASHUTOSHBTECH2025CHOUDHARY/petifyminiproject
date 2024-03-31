@@ -15,6 +15,17 @@ router.get('/getuser/:id',async(req,res)=>{
   res.status(200).json({user})
 
 })
+router.get('/getthisuser/:id',async(req,res)=>{
+  let {id}=req.params
+  let user=await User_model.findById(id)
+  let postid=user.Post
+  let posts=[]
+  for(let i of postid){
+    let post=await Postmodel.findById(i)
+    posts.push(post)
+  }
+  res.status(200).json({user,posts})
+})
 router.delete('/deleteuser/:id',async(req,res)=>{
   let {id}=req.params
   let user=await User_model.findById(id)

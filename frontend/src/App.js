@@ -9,6 +9,7 @@ import Singlepost from './Components/Singlepost'
 import { Mysinglepost } from './Components/Mysinglepost'
 import Createpost from './Components/Createpost'
 import Adminpage from './Components/Adminpage'
+import Seeuser from './Components/Seeuser'
 const App = () => {
   return (
     <div>
@@ -23,6 +24,7 @@ const App = () => {
           <Route path='/mypost' element={<Myposts/>}/>
           <Route path='/singlepost/:id' element={<Singlepost/>}/>
           <Route path='mysinglepost/:id' element={<Mysinglepost/>}/>
+          <Route path='/seeuser/:id' element={<Seeuser/>}/>
         </Routes>
     </div>
   )
