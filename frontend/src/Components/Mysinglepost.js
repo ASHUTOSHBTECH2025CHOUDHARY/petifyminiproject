@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {HStack,Box,Image,Heading,Text,Button, Flex,Avatar,VStack, Container} from "@chakra-ui/react"
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export const Mysinglepost = () => {
     const [post,setpost]=useState([])
@@ -94,6 +94,7 @@ export const Mysinglepost = () => {
 </Box>
                   </VStack>
                 </HStack>
+                <Link to='/chatbox'>
                 <Button
                   variant="solid"
                   colorScheme="blue"
@@ -106,8 +107,9 @@ export const Mysinglepost = () => {
                   lineHeight="40px" // Center button content vertically
                   borderRadius="md" // Apply border radius
                 >
-                  Adopt it
+                  Approve it
                 </Button>
+                </Link>
               </Box>
               
             })

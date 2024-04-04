@@ -49,6 +49,9 @@ const Myposts = () => {
   const handlecreatepost=(id)=>{
     navigation(`/createpost/${_id}`)
   }
+  const handleapplications=async()=>{
+    navigation(`/myapplications/${_id}`)
+  }
   const handledelete=async(id)=>{
     console.log(_id)
     console.log(id)
@@ -89,7 +92,10 @@ const Myposts = () => {
         overflowY="auto"
         css={{ "&::-webkit-scrollbar": { display: "none" } }}
       >
+        <HStack>
         <Button onClick={handlecreatepost}>createpost</Button>
+        <Button onClick={handleapplications}>my applications</Button>
+        </HStack>
         {post.map((posts, index) => (
   <Box
     key={index}

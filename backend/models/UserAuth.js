@@ -20,6 +20,11 @@ const User_Schema = new mongoose.Schema({
     type:String,
     default:"user"
   },
+  applicationid:[{
+    type:mongoose.Schema.ObjectId,
+    ref:"Application"
+  }]
+  ,
   Post: [{
     type: mongoose.Schema.ObjectId,
     ref: "post",
