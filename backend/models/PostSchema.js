@@ -3,7 +3,7 @@ const Post_Schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-  },
+  },  
   categories: {
     type: String,
     enums: ["cat", "dog", "birds", "others"],

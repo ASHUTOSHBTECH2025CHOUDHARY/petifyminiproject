@@ -104,7 +104,7 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
     return res.status(200).send(token)
   } catch (error) {
-    console.log(error);
+    console.log(error); 
     return res.status(500).send({ msg: error });
   }
 });

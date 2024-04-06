@@ -10,8 +10,8 @@ import { Mysinglepost } from './Components/Mysinglepost'
 import Createpost from './Components/Createpost'
 import Adminpage from './Components/Adminpage'
 import Seeuser from './Components/Seeuser'
-import Chatbox from './Components/Chatbox'
 import Myapplications from './Components/Myapplications'
+import Messenger from './Components/Messenger'
 const App = () => {
   return (
     <div>
@@ -19,8 +19,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Login/>}/>
           <Route path='/adminpanel' element={<Adminpage/>}/>
+          <Route path='/messenger/:id' element={<Messenger/>}/>
           <Route path='/myapplications/:id' element={<Myapplications/>}/> 
-          <Route path='/chatbox' element={<Chatbox/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='signup'element={<Signup/>}/>
           <Route path='/createpost/:id' element={<Createpost/>}/>
