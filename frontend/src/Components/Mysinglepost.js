@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {HStack,Box,Image,Heading,Text,Button, Flex,Avatar,VStack, Container} from "@chakra-ui/react"
-import { Link, useLocation } from 'react-router-dom'
-
+import { Link, useLocation,useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { addpostid, addtoken } from "../Store/Slice/Userslice";
 export const Mysinglepost = () => {
     const [post,setpost]=useState([])
     const [appliction,setapplication]=useState([])
+    const navigate=useNavigate()
     const location=useLocation()
     let _id='';
-    console.log(post)
+    const dispatch=useDispatch()
+  let token=localStorage.getItem("token")
+  dispatch(addtoken(token))
+  const id=useSelector(state=>state.userdata._id)
     const findpost=async()=>{
       let res=await axios.get( `http://localhost:8080/api/v2/getthispost/${_id}`,{withCredentials:true}).catch((error)=>console.log(error))
       let data=res.data.post
@@ -20,6 +25,15 @@ export const Mysinglepost = () => {
         })
         console.log(res.data.allapplication)
         return res.data.allapplication
+    }
+    const handleapprove=async(userid)=>{
+      await axios.post(`http://localhost:8080/api/v4/createconversation`,{
+        senderid:id,
+        receiverid:userid
+      
+      }).catch((err)=>console.log(err))
+      console.log(id)
+      navigate(`/messenger/${id}`)
     }
     useEffect(()=>{
         console.log(location.pathname.split('/'))
@@ -94,7 +108,6 @@ export const Mysinglepost = () => {
 </Box>
                   </VStack>
                 </HStack>
-                <Link to='/chatbox'>
                 <Button
                   variant="solid"
                   colorScheme="blue"
@@ -106,10 +119,11 @@ export const Mysinglepost = () => {
                   height="40px" // Set fixed height
                   lineHeight="40px" // Center button content vertically
                   borderRadius="md" // Apply border radius
+                  onClick={()=>handleapprove(item.
+                    userid)}
                 >
                   Approve it
                 </Button>
-                </Link>
               </Box>
               
             })

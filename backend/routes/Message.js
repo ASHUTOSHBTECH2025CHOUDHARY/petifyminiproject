@@ -17,7 +17,7 @@ router.get('/getmsg/:id',async(req,res)=>{
         const messages=await message.find({
             conversationid:req.params.id
         })
-        console.log(req.params.id)
+
         res.status(200).json({messages})
     } catch (error) {
         res.status(500).json({error})
