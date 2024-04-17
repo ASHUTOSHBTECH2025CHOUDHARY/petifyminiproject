@@ -25,7 +25,7 @@ const Navbar = () => {
     <Flex
       align="center"
       justify="space-between"
-      bg="teal.500"
+      bg="yellow.500"
       p={[10, 4]}
       color="white"
       position="sticky"
