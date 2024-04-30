@@ -63,31 +63,51 @@ const Myposts = () => {
     findPosts().then((data) => setPost(data));
   },[]);
   return (
-    <HStack width="100%" height="100vh" marginTop={5}>
-      <VStack width="20%" height="100%">
+    <HStack width="100%" height="100vh" marginTop={5} padding={3}>
+      <VStack 
+        // width="20%" height=" 100%"
+        height="100%" m={5}
+          // marginLeft={100}
+          // marginRight={100}
+          width="150px"
+          // height="100%"
+      >
         <Flex
-          align="center"
-          justify="space-between"
-          bg="gray.100"
-          p={4}
-          borderRadius="md"
+          marginLeft={100}
+          // align="center"
+          // justify="space-between"
+          // bg="gray.100"
+          // p={4}
+          // borderRadius="md"
         >
+          
+          <Box ml={4}
+            align="center"
+            justify="space-between"
+            bg="green.100"
+            p={3}
+            // marginLeft={3}
+            borderRadius="md"
+            width="250px"
+          >
           <Avatar name="John Doe" src="https://via.placeholder.com/150" />
-          <Box ml={4}>
             <Text fontSize="xl">John Doe</Text>
             <Text fontSize="sm" color="gray.600">
               Frontend Developer
             </Text>
-          </Box>
-          <Button colorScheme="teal" variant="outline" size="sm">
+            <Button colorScheme="teal" variant="outline" size="sm">
             Edit Profile
           </Button>
+          </Box>
+          
         </Flex>
       </VStack>
 
       <VStack
+        marginLeft={100}
+        marginRight={100}
         id="add"
-        width="60%"
+        width="1000px"
         height="100%"
         overflowY="auto"
         css={{ "&::-webkit-scrollbar": { display: "none" } }}

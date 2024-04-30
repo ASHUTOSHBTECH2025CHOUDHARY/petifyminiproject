@@ -25,12 +25,12 @@ const Navbar = () => {
     <Flex
       align="center"
       justify="space-between"
-      bg="yellow.500"
-      p={[10, 4]}
+      bg="teal.500"
+      p={[7, 3]}
       color="white"
       position="sticky"
       top="0"
-      zIndex="999" // Ensure the Navbar appears above other content
+      zIndex="999" 
     >
       <Link to="/">
         <Flex align="center" mx={10}>
@@ -40,16 +40,19 @@ const Navbar = () => {
             PETIFY
           </Text>
           </Link>
+          <Link to='/Home'>
+        <Text fontSize="medium" mx={"30px"} fontWeight="bold"> Home </Text>
+      </Link>
         </Flex>
       </Link>
         {
-      
-          item===null?'':<Flex ><Link to="/mypost" ><Button>
-            Myposts
-              </Button></Link>
-            <Button mx={"4px"} onClick={logout}>
-            <Text>logout</Text>
-          </Button>
+          item=== null ? '' : <Flex mx={10}>
+            <Link to="/mypost" >
+              <Text fontSize="medium" mx={"30px"} fontWeight="bold"> Myposts</Text>
+            </Link>
+            <Link mx={"4px"} onClick={logout}>
+              <Text fontSize="medium" fontWeight="bold"> LogOut</Text>
+          </Link>
         </Flex>
         }
     </Flex>

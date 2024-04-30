@@ -1,7 +1,8 @@
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {HStack,Box,Image,Heading,Text,Button, Flex,Avatar,VStack, Container} from "@chakra-ui/react"
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export const Mysinglepost = () => {
     const [post,setpost]=useState([])
@@ -32,41 +33,45 @@ export const Mysinglepost = () => {
     console.log(appliction)
     return (
     <Flex padding={4}>
+        <Container>
         <Box
-        flex="1"
-  direction={{ base: "column", sm: "row" }}
-  boxShadow="lg"
-  padding={4}
-  borderRadius="md"
-  overflow="hidden"
-  variant="outline"
-  width="100%"
-  maxW="50%"
-  minH="500px"
-  bg="white"
-  border="1px solid #E2E8F0"
-  _hover={{ boxShadow: "xl" }}
->
-  <Image
-    objectFit="cover"
-    width="full"
-    maxH="300px"
-    src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-    alt="Caffe Latte"
-  />
-  <Box px={4} py={2} width="100%">
-    <Heading size="md" mt={4} mb={2}>Name: {post.name}</Heading>
-    <Heading size="sd" mt={4} mb={2}>Categorie: {post.categories}</Heading>
-    <Text fontWeight="semibold" py="2">
-      {post.content}
-    </Text>
-    <HStack spacing={4}>
-      <Button variant="solid" colorScheme="blue">
-        Buy Latte
-      </Button>
-    </HStack>
-  </Box>
-</Box>
+          flex="1"
+            direction={{ base: "column", sm: "row" }}
+            boxShadow="lg"
+            padding={4}
+            borderRadius="md"
+            overflow="hidden"
+            variant="outline"
+            width="550px"
+            // maxW="50%"
+            // minH="100px"
+            bg="white"
+            border="1px solid #E2E8F0"
+            _hover={{ boxShadow: "xl" }}
+        >
+            <Image
+              objectFit="cover"
+              width="full"
+              maxH="300px"
+              src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+              alt="Caffe Latte"
+            />
+          <Box px={4} py={2} width="100%">
+            <Heading size="md" mt={4} mb={2}>Name: {post.name}</Heading>
+            <Heading size="sd" mt={4} mb={2}>Categorie: {post.categories}</Heading>
+            <Text fontWeight="semibold" py="2">
+              {post.content}
+            </Text>
+            <HStack spacing={4}>
+              <Button variant="solid" colorScheme="blue">
+                Buy Latte
+              </Button>
+            </HStack>
+          </Box>
+        </Box>
+</Container>
+
+
 <Container marginTop={0}>
         {
             appliction.map((item,index)=>{
@@ -88,30 +93,27 @@ export const Mysinglepost = () => {
                     <Heading size="md">{item.firstname}</Heading>
                     <Heading size="md">{item.lastname}</Heading>
                     <Box maxW="100%" overflow="hidden" overflowY="auto">
-  <Text>
-    {item.content}
-  </Text>
-</Box>
+                      <Text>
+                          {item.content}
+                      </Text>
+                    </Box>
                   </VStack>
                 </HStack>
-                <Link to='/chatbox'>
-                <Button
-                  variant="solid"
-                  colorScheme="blue"
-                  position="absolute"
-                  bottom="4"
-                  right="4"
-                  fontSize="sm" // Set font size
-                  width="100px" // Set fixed width
-                  height="40px" // Set fixed height
-                  lineHeight="40px" // Center button content vertically
-                  borderRadius="md" // Apply border radius
-                >
-                  Approve it
-                </Button>
-                </Link>
+                    <Button
+                      variant="solid"
+                      colorScheme="blue"
+                      position="absolute"
+                      bottom="4"
+                      right="4"
+                      fontSize="sm" // Set font size
+                      width="100px" // Set fixed width
+                      height="40px" // Set fixed height
+                      lineHeight="40px" // Center button content vertically
+                      borderRadius="md" // Apply border radius
+                    >
+                      Adopt it
+                    </Button>
               </Box>
-              
             })
         }
         </Container> 

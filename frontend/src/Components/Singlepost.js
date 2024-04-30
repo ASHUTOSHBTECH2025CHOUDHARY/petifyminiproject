@@ -122,43 +122,41 @@ const Singlepost = () => {
   }, []);
 
   return (
-    <HStack p={2}>
-      <Box
-  direction={{ base: "column", sm: "row" }}
-  boxShadow="lg"
-  padding={4}
-  borderRadius="md"
-  overflow="hidden"
-  variant="outline"
-  width="100%"
-  maxW="50%"
-  minH="50vh"
-  bg="white"
-  border="1px solid #E2E8F0"
-  _hover={{ boxShadow: "xl" }}
->
-  <Image
-    objectFit="cover"
-    width="full"
-    maxH="300px"
-    src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-    alt="Caffe Latte"
-  />
-  <Box px={4} py={2} width="100%">
-    <Heading size="md" mt={4} mb={2}>Name: {post.name}</Heading>
-    <Heading size="sd" mt={4} mb={2}>Categorie: {post.categories}</Heading>
-    <Text fontWeight="semibold" py="2">
-      {post.content}
-    </Text>
-    <HStack spacing={4}>
-      <Button variant="solid" colorScheme="blue">
-        Buy Latte
-      </Button>
-    </HStack>
-  </Box>
-</Box>
-
-
+        <HStack p={10}>
+          <Box
+          direction={{ base: "column", sm: "row" }}
+          boxShadow="lg"
+          padding={4}
+          borderRadius="md"
+          overflow="hidden"
+          variant="outline"
+          width="100%"
+          maxW="50%"
+          minH="50vh"
+          bg="white"
+          border="1px solid #E2E8F0"
+          _hover={{ boxShadow: "xl" }}
+        >
+        <Image
+          objectFit="cover"
+          width="full"
+          maxH="300px"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQROKudm6aylL9w7sWsDkaCkZ_SmJ-mbY8zyLiSYJyL0g&s"
+          alt="Caffe Latte"
+        />
+        <Box px={4} py={2} width="100%">
+          <Heading size="md" mt={4} mb={2}>Name: {post.name}</Heading>
+          <Heading size="sd" mt={4} mb={2}>Categorie: {post.categories}</Heading>
+          <Text fontWeight="semibold" py="2">
+            {post.content}
+          </Text>
+          <HStack spacing={4}>
+            <Button variant="solid" colorScheme="blue">
+              Buy Latte
+            </Button>
+          </HStack>
+        </Box>
+      </Box>
       <Box
         width="50%"
         m={3}

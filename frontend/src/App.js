@@ -12,11 +12,14 @@ import Adminpage from './Components/Adminpage'
 import Seeuser from './Components/Seeuser'
 import Myapplications from './Components/Myapplications'
 import Messenger from './Components/Messenger'
+import LandingPage from './Components/LandingPage'
+import Footer from './Components/Footer'
 const App = () => {
   return (
     <div>
         <Navbar/>
         <Routes>
+          <Route path='/Home' element={<LandingPage/>}/>
           <Route path='/' element={<Login/>}/>
           <Route path='/adminpanel' element={<Adminpage/>}/>
           <Route path='/messenger/:id' element={<Messenger/>}/>
@@ -30,6 +33,7 @@ const App = () => {
           <Route path='mysinglepost/:id' element={<Mysinglepost/>}/>
           <Route path='/seeuser/:id' element={<Seeuser/>}/>
         </Routes>
+        <Footer/>
     </div>
   )
 }

@@ -61,7 +61,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <HStack width="100%" height="100vh" marginTop={5} padding={3}>
+    <HStack width="100%" height="100vh" padding={"30px"}>
       <VStack  height="100%" m={10}>
         <Flex
           align="center"
@@ -106,15 +106,15 @@ const Dashboard = () => {
           minW="400px"
           maxW="full"
           maxH="200px"
-          minH="200px" // Set maximum width
-          height="200px" // Set fixed height
+          minH="200px" 
+          height="200px" 
         >
-          <HStack px={4} py={2} spacing={4} width="100%" height="100%"> {/* Specify height for HStack */}
+          <HStack px={4} py={2} spacing={4} width="100%" height="100%"> 
             <Image
               objectFit="cover"
               maxW={{ base: "100%", sm: "200px" }}
               minW={{ base: "100%", sm: "200px" }}
-              maxH="100%" // Set maximum height
+              maxH="100%"
               src="https://t4.ftcdn.net/jpg/02/26/53/33/360_F_226533348_TiIz0m2dU4dBXC6yFJrNOfXfh5YcEecY.jpg"
               alt="Caffe Latte"
             />
@@ -122,9 +122,8 @@ const Dashboard = () => {
               <Heading size="md">{posts.name}</Heading>
               <Heading size="md">{posts.categories}</Heading>
               <Text>
-  {posts.content.split(" ").slice(0, 10).join(" ")}
-  {/* text is your input string */}...
-</Text>
+                  {posts.content.split(" ").slice(0, 10).join(" ")}...
+              </Text>
             </VStack>
           </HStack>
           <Button
@@ -133,11 +132,11 @@ const Dashboard = () => {
             position="absolute"
             bottom="4"
             right="4"
-            fontSize="sm" // Set font size
-            width="100px" // Set fixed width
-            height="40px" // Set fixed height
-            lineHeight="40px" // Center button content vertically
-            borderRadius="md" // Apply border radius
+            fontSize="sm" 
+            width="100px" 
+            height="40px" 
+            lineHeight="40px" 
+            borderRadius="md" 
             onClick={() => handleclick(posts._id)}
           >
             Adopt it

@@ -61,6 +61,7 @@ const Login = () => {
       style={{
         display: "flex",
         justifyContent: "center",
+        paddingBottom:"50px"
       }}
     >
       <HStack spacing={10}>

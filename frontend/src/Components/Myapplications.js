@@ -18,8 +18,8 @@ const Myapplications = () => {
         findallplicatioins().then((data)=>setapplications(data)).catch((err)=>console.log(err))
     },[])
   return (
-   <Container>
-    <VStack>
+   <Container padding={10}>
+    <VStack >
         {
             applications.map((item,index)=>{
                 return <Card
@@ -30,13 +30,13 @@ const Myapplications = () => {
                 <Image
                   objectFit='cover'
                   maxW={{ base: '100%', sm: '200px' }}
-                  src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
+                  src='https://images.hindustantimes.com/img/2022/02/10/550x309/dog_thumb_1644498337052_1644498346070.jpg'
                   alt='Caffe Latte'
                 />
               
                 <Stack>
                   <CardBody>
-                    <Heading size='md'>The perfect latte</Heading>
+                    <Heading size='md'>The perfect Pet</Heading>
               
                     <Text py='2'>
                      {
